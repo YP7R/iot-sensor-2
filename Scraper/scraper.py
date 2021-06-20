@@ -8,7 +8,7 @@ import json
 random = np.random.RandomState(10)
 chars = string.digits + string.ascii_lowercase
 
-
+# https://github.com/aaugustin/websockets/issues/653
 class Scraper:
     def __init__(self):
         self.users = set()
