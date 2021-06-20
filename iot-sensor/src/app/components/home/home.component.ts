@@ -18,12 +18,18 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.dataservice.connect().subscribe()
-    this.sendMessage()
 
   }
-  sendMessage() {
-    this.dataservice.send({ message: "Salut"});
+  connection() {
+    this.dataservice.connect().subscribe(x => console.log(x))
+    // this.dataservice.send({ message: "Salut"})
+  }
+
+  sendMessage(){
+    this.dataservice.send({id:"new_client"})
   }
   
+  ngOnDestroy(){
+    this.destroyed$.next()
+  }
 }

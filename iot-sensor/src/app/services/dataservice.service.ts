@@ -13,20 +13,26 @@ export class DataserviceService {
   constructor(){}
   
   connect():Observable<any>{
+    this.connection$ = webSocket('ws://localhost:3000')
+    return this.connection$.pipe(tap(e => console.log("Logger")))
+    /*
     return of('http://localhost:3000').pipe(
       filter(apiUrl => !!apiUrl),
       map(apiUrl => apiUrl.replace(/^http/,'ws')),
       switchMap(wsUrl=>{
-        if(this.connection$){
+        if(this.connection$){ 
+          console.log("connectin exist")
           return this.connection$
         }else{
+          console.log("connectin doesn't exist")
+
           this.connection$ = webSocket(wsUrl)
           return this.connection$
         }
       }),
       retryWhen((erros)=>erros.pipe(delay(this.RETRY_SECONDS)))
-
-    )
+      
+    )*/
   }
   send(data:any){
     if(this.connection$){
