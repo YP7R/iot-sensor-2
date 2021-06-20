@@ -1,0 +1,49 @@
+<div  id="identification_sensor{{this.sensor.sensor}}_controller{{this.sensor.controller}}">
+    <div class="shadow card mb-3 border-light">
+        <div class="card-body">
+            <h5 class="card-title">Sensor
+                <span id="${sensor_controller_id}_sensor">{{this.sensor.sensor}}</span>
+                from
+                RaspBerry PI-<span id="${sensor_controller_id}_controller">{{this.sensor.controller}}</span>
+            </h5>
+            <h6 class="card-subtitle text-muted"><span
+                    id="${sensor_controller_id}_location">{{this.sensor.location}}</span></h6>
+            <ul class="list-group list-group-flush font-italic">
+                <li class="list-group-item">
+                    <div class="progress">
+                        <div class="progress-bar" id=${sensor_controller_id}_battery role="progressbar"
+                            style="{{'width:'+this.sensor.battery+'%'}}" aria-valuemin="0" aria-valuemax="100">
+                            {{this.sensor.battery}}%
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Humidity : <span id="${sensor_controller_id}_humidity">
+                        {{this.sensor.humidity}}
+                    </span>
+                </li>
+                <li id="${sensor_controller_id}_elem_temperature" class="list-group-item">
+                    Temperature : <span>
+                        {{this.sensor.temperature}}
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    Luminance : <span id="${sensor_controller_id}_luminance">
+                        {{this.sensor.luminance}}
+                    </span>
+                  </li>
+                  <li class="list-group-item">
+                    Motion : <span id="${sensor_controller_id}_motion">
+                        {{this.sensor.motion}}
+                    </span>
+                  </li>
+            </ul>
+
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last update : <span id="${sensor_controller_id}_updateTime">
+                {{this.sensor.updateTime}}
+            </span></small>
+          </div>
+    </div>
+</div>

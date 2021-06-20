@@ -14,25 +14,19 @@ class Scraper:
         self.users = set()
         self.values = [{'sensor_id':0,'id':0}]
 
-    async def hello(self, ws, path):
-        name = ''.join([chars[random.randint(0, len(chars))] for i in range(10)])
-        print(f"{ws.origin} {name}")
-        name = await ws.recv()
-        # greeting = f"Hello {name} !"
-        # print(greeting)
-        await ws.send(json.dumps({'origin': ws.origin, 'name': name}))
-
     async def new_client(self, ws, path):
         self.users.add(ws)
+        print(ws.origin)
         try:
             async for message in ws:
                 msg = json.loads(message)
+                print(f"{msg} from {ws.origin}")
                 if msg['id'] == "new_client":
                     await ws.send(json.dumps(self.values))
                 else:
                     print(f"Not supported : {msg.id}")
         finally:
-            print(f"finally {ws.origin}")
+            print(f"Disconnected : {ws.origin}")
             self.users.remove(ws)
 
     async def broadcast(self):
@@ -56,9 +50,8 @@ class Scraper:
                   'controller': np.random.randint(0, 1)}
         return sensor
 
+
 scraper = Scraper()
-
-
 start_server = websockets.serve(scraper.new_client, "127.0.0.1", 3000)
 asyncio.get_event_loop().create_task(scraper.broadcast())
 asyncio.get_event_loop().run_until_complete(start_server)

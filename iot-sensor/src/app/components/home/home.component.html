@@ -1,3 +1,17 @@
-<p>home works!</p>
-<button (click)="this.connection()">Connection </button>
-<button (click)="this.sendMessage()">SendMesssage</button>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <span class="fs-4">IOT- Sensors </span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-3">
+    <div class="row" id="sensors" >
+            <app-sensor class="col-md-3" *ngFor="let message of dataservice.messages" [sensor]="message"></app-sensor>
+        
+
+    </div>
+</div>
